@@ -1,0 +1,49 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <artifactId>qb</artifactId>
+        <groupId>com.wjs.qb</groupId>
+        <version>1.1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <name>qb-war-inrpc</name>
+    <description>qb-war-inprc pom file</description>
+
+    <artifactId>qb-war-inrpc</artifactId>
+    <packaging>war</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>com.wjs.qb</groupId>
+            <artifactId>qb-service</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+    </dependencies>
+    <build>
+        <finalName>qb-inrpc</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <port>8083</port>
+                    <path>/qb-inrpc</path>
+                    <uriEncoding>UTF-8</uriEncoding>
+                    <finalName>qb</finalName>
+                    <server>tomcat7</server>
+                    <contextReloadable>true</contextReloadable>
+                    <contextFile>src/test/resources/context.xml</contextFile>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

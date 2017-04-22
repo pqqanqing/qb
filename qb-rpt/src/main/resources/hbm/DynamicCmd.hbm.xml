@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field">
+    <class name="com.wjs.qb.domain.dynamiccmd.DynamicCmd" table="TB_DYNAMIC_CMD" batch-size="100"
+           schema="qb_database"
+           where="logic_delete = 0">
+        <!--<cache usage="read-only" />-->
+        <comment>动态操作表</comment>
+        <id name="id" access="property">
+            <column name="id" not-null="true" length="20">
+                <comment>主键</comment>
+            </column>
+            <generator class="identity"/>
+        </id>
+        <discriminator>
+            <column name="type" not-null="true" sql-type="integer">
+                <comment>鉴别器类型(1:待审核;2:发布成功;)</comment>
+            </column>
+        </discriminator>
+        <version name="version" type="long">
+            <column name="version" default="0" not-null="true">
+                <comment>版本号</comment>
+            </column>
+        </version>
+        <property name="createTime" type="timestamp" update="false">
+            <column name="create_time" not-null="true" length="50">
+                <comment>创建时间</comment>
+            </column>
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="update_time" not-null="true" length="50">
+                <comment>更新时间</comment>
+            </column>
+        </property>
+        <property name="logicDelete">
+            <column name="logic_delete" not-null="true" default="0">
+                <comment>是否已逻辑删除</comment>
+            </column>
+        </property>
+        <many-to-one name="dynamic">
+            <column name="dynamic_id">
+                <comment>dynamic外键</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="member">
+            <column name="member_id">
+                <comment>member外键</comment>
+            </column>
+        </many-to-one>
+        <property name="type" column="type" update="false" insert="false"/>
+        <subclass discriminator-value="1" name="com.wjs.qb.domain.dynamiccmd.DynamicCmd4Send"/>
+        <subclass discriminator-value="2" name="com.wjs.qb.domain.dynamiccmd.DynamicCmd4Check"/>
+        <subclass discriminator-value="3" name="com.wjs.qb.domain.dynamiccmd.DynamicCmd4Delete"/>
+        <subclass discriminator-value="4" name="com.wjs.qb.domain.dynamiccmd.DynamicCmd4Recover"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field">
+    <class name="com.wjs.qb.domain.member.Member" table="TB_MEMBER" batch-size="100" schema="qb_database"
+           where="logic_delete = 0">
+        <!--<cache usage="read-only" />-->
+        <comment>会员表</comment>
+        <id name="id" access="property">
+            <column name="id" not-null="true" length="20">
+                <comment>主键</comment>
+            </column>
+            <generator class="identity"/>
+        </id>
+        <version name="version" type="long">
+            <column name="version" default="0" not-null="true">
+                <comment>版本号</comment>
+            </column>
+        </version>
+        <property name="createTime" type="timestamp" update="false">
+            <column name="create_time" not-null="true" length="50">
+                <comment>创建时间</comment>
+            </column>
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="update_time" not-null="true" length="50">
+                <comment>更新时间</comment>
+            </column>
+        </property>
+        <property name="logicDelete">
+            <column name="logic_delete" not-null="true" default="0">
+                <comment>是否已逻辑删除</comment>
+            </column>
+        </property>
+        <property name="name">
+            <column name="name">
+                <comment>名称</comment>
+            </column>
+        </property>
+        <property name="memberId">
+            <column name="member_id">
+                <comment>member外键</comment>
+            </column>
+        </property>
+        <property name="openId">
+            <column name="open_id">
+                <comment>openid</comment>
+            </column>
+        </property>
+        <property name="nickname">
+            <column name="nickname">
+                <comment>昵称</comment>
+            </column>
+        </property>
+        <property name="status" type="memberStatus">
+            <column name="status">
+                <comment>状态(0:正常;1:禁言)</comment>
+            </column>
+        </property>
+        <many-to-one name="attachment" cascade="all">
+            <column name="attachment_id">
+                <comment>attachment外键</comment>
+            </column>
+        </many-to-one>
+        <property name="reportDynamicCount">
+            <column name="report_dynamic_count">
+                <comment>举报的动态数</comment>
+            </column>
+        </property>
+        <property name="reportCommentCount">
+            <column name="report_comment_count">
+                <comment>举报的评论数</comment>
+            </column>
+        </property>
+        <bag name="topics" cascade="save-update" inverse="true" optimistic-lock="false" batch-size="100"
+             order-by="create_time desc" where="logic_delete=0">
+            <key column="member_id"/>
+            <one-to-many class="com.wjs.qb.domain.topic.Topic"/>
+        </bag>
+        <bag name="groups" cascade="save-update" inverse="true" optimistic-lock="false" batch-size="100"
+             order-by="create_time desc" where="logic_delete=0">
+            <key column="member_id"/>
+            <one-to-many class="com.wjs.qb.domain.group.Group"/>
+        </bag>
+        <bag name="messages" cascade="save-update" inverse="true" optimistic-lock="false" batch-size="100"
+             order-by="create_time desc" where="logic_delete=0">
+            <key column="member_id"/>
+            <one-to-many class="com.wjs.qb.domain.message.Message"/>
+        </bag>
+    </class>
+</hibernate-mapping>

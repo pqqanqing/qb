@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field">
+
+    <typedef name="dynamicStatus" class="com.wjs.common.base.usertype.hibernate.StatusAndClassNumUserType">
+        <param name="usertype">com.wjs.qb.domain.dynamic.status.DynamicStatus</param>
+    </typedef>
+
+    <typedef name="topicStatus" class="com.wjs.common.base.usertype.hibernate.StatusAndClassNumUserType">
+        <param name="usertype">com.wjs.qb.domain.topic.status.TopicStatus</param>
+    </typedef>
+
+    <typedef name="memberStatus" class="com.wjs.common.base.usertype.hibernate.StatusAndClassNumUserType">
+        <param name="usertype">com.wjs.qb.domain.member.status.MemberStatus</param>
+    </typedef>
+
+</hibernate-mapping>
