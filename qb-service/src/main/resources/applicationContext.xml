@@ -17,17 +17,13 @@
           class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>file:/opt/wechat/config/qb/sc.properties</value>
-                <!--<value>file:F:\\ideaWorkSpace\\config\\qb\\sc.properties</value>-->
+                <value>file:/Users/panqingqing/githubWorkspaces/config/qb/sc.properties</value>
             </list>
         </property>
     </bean>
 
     <!-- spring上下文 -->
     <bean id="springBeanContext" class="com.wjs.common.base.spring.SpringBeanContext"/>
-
-    <!-- facade 接口 -->
-    <context:component-scan base-package="com.wjs.qb.facade"/>
 
     <!-- queryService查询接口 -->
     <bean id="queryService" class="com.wjs.common.base.query.QueryServiceImpl">
@@ -44,8 +40,7 @@
         </property>
     </bean>
 
-    <context:component-scan
-            base-package="com.wjs.common.base.service,com.wjs.common.base.rpt,com.wjs.qb.service,com.wjs.qb.rpt">
+    <context:component-scan  base-package="com.wjs.qb.facade,com.wjs.qb.service,com.wjs.qb.rpt">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
@@ -99,8 +94,7 @@
     <!-- 导入项目配置文件地址 -->
     <bean class="com.wjs.common.base.properties.ProjectProperties">
         <property name="properties">
-            <util:properties location="file:/opt/wechat/config/qb/sc.properties"/>
-            <!--<util:properties location="file:F:\\ideaWorkSpace\\config\\qb\\sc.properties"/>-->
+            <util:properties location="file:/Users/panqingqing/githubWorkspaces/config/qb/sc.properties"/>
         </property>
     </bean>
 

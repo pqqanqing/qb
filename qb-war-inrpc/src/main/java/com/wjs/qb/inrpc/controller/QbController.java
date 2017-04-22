@@ -22,7 +22,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @CrossOrigin
 @Controller
-@RequestMapping("/wechat")
+@RequestMapping("/qb")
 public class QbController {
 
     @Autowired
@@ -109,6 +109,7 @@ public class QbController {
 
     /**
      * 后台管理人员发表动态
+     *
      * @param openId
      * @param dynamicDTO
      * @return
@@ -386,7 +387,8 @@ public class QbController {
     }
 
     /**
-     *查询最新的一条话题
+     * 查询最新的一条话题
+     *
      * @return
      */
     @RequestMapping(value = "/topic", method = GET)
