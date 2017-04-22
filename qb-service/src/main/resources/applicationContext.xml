@@ -46,14 +46,14 @@
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
-    <jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/ds_qb"/>
+    <!--<jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/ds_qb"/>-->
 
-    <!--<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
-        <!--<property name="driverClassName" value="${mysql.driverClassName}"/>-->
-        <!--<property name="url" value="${mysql.url}"/>-->
-        <!--<property name="username" value="${mysql.username}"/>-->
-        <!--<property name="password" value="${mysql.password}"/>-->
-    <!--</bean>-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${mysql.driverClassName}"/>
+        <property name="url" value="${mysql.url}"/>
+        <property name="username" value="${mysql.username}"/>
+        <property name="password" value="${mysql.password}"/>
+    </bean>
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
